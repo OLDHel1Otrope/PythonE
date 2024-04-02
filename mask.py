@@ -33,7 +33,12 @@ def extract_areas_using_mask(background_img_path, overlay_img_path, output_img_p
                 overlay_img.putpixel((x, y), background_pixel)
     overlay_img.save(output_img_path)
 
-
+def extract_text_from_image(image_path):
+    # Open the image
+    img = Image.open(image_path)
+    text = pytesseract.image_to_string(img)
+    return text
+    
 background_image_path = "input.png"
 overlay_image_path = "mask.png"
 output_image_path = "result.png"
