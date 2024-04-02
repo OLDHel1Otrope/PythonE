@@ -1,4 +1,7 @@
 from PIL import Image, ImageFilter
+import pytesseract
+import pickle
+pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files\\Tesseract-OCR\\tesseract.exe'
 
 def overlay_images(background_img_path, overlay_img_path, output_img_path):
     background_img = Image.open(background_img_path)
@@ -38,10 +41,13 @@ def extract_text_from_image(image_path):
     img = Image.open(image_path)
     text = pytesseract.image_to_string(img)
     return text
-    
+
+
 background_image_path = "input.png"
 overlay_image_path = "mask.png"
 output_image_path = "result.png"
 output_adv_image_path = "extracted_text.png"
 overlay_images(background_image_path, overlay_image_path, output_image_path)
 extract_areas_using_mask(background_image_path, overlay_image_path, output_adv_image_path)
+data=extract_text_from_image(output_adv_image_path)
+print(data)
